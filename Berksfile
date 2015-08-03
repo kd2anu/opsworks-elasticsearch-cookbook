@@ -13,4 +13,4 @@ cookbook 'rsyslog', '>= 1.11.0', git: 'git://github.com/opscode-cookbooks/rsyslo
 cookbook 'windows', '>= 1.30.0', git: 'git://github.com/opscode-cookbooks/windows.git', tag: 'v1.30.2'
 cookbook 'elasticsearch', '>= 0.3.13', git: 'git://github.com/elasticsearch/cookbook-elasticsearch.git', tag: 'v0.3.13'
 cookbook 'mongodb', git: 'git://github.com/edelight/chef-mongodb'
-cookbook 'nginx_cleanup', git" 'git://github.com/Scanbuy-Inc/opsworks-elasticsearch-cookbook.git'
+cookbook 'layer-custom', git: 'git://github.com/Scanbuy-Inc/opsworks-elasticsearch-cookbook.git'
