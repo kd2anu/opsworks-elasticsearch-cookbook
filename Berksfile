@@ -1,7 +1,7 @@
 source "https://supermarket.chef.io"
 
 cookbook 'apt', '>= 2.7.0'
-cookbook 'yum', '>=v3.6.3'
+cookbook 'yum', '>= 3.6.3'
 cookbook 'yum-epel', '>= 0.3.6'
 cookbook 'ark'
 cookbook 'bluepill', '>= 2.3.1'
