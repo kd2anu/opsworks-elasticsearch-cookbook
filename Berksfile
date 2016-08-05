@@ -3,7 +3,7 @@ source "https://supermarket.chef.io"
 cookbook 'apt', '= 4.0.1'
 cookbook 'yum', '= 3.11.0'
 cookbook 'yum-epel', '= 0.7.0'
-cookbook 'ark', '= 1.2.0
+cookbook 'ark', '= 1.2.0'
 cookbook 'bluepill', '= 2.4.3'
 cookbook 'build-essential', '= 6.0.3'
 cookbook 'java', '= 1.41.0'
