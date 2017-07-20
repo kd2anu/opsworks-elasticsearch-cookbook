@@ -1,24 +1,21 @@
-group node['es']['group'] do
+group "#{node['es']['group']}" do
   action :create
   system true
+  not_if "grep -q ^#{node['es']['group']} /etc/group"
 end
 
-user node['es'][:user] do
+user "#{node['es']['user']}" do
+  gid "#{node['es']['group']}"
   shell   "/bin/bash"
   action  :create
   system true
-end
-
-bash "remove ES user home" do
-  user    'root'
-  code    "rm -rf  #{node.elasticsearch[:dir]}/elasticsearch"
-  only_if { ::File.directory?("/home/elasticsearch") }
+  not_if "grep -q ^#{node['es']['user']} /etc/passwd"
 end
 
 # set user/group on data directory:
 directory "#{node['es']['path.data']}" do
-  owner 'elasticsearch'
-  group 'elasticsearch'
+  owner "#{node['es']['user']}"
+  group "#{node['es']['group']}"
   mode '0755'
   action :create
 end
