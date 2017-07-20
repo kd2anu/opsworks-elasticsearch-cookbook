@@ -21,18 +21,18 @@ directory "#{node['es']['path.data']}" do
 end
 
 # download RPM from URL:
-remote_file "/var/chef/cache/#{node['es']['pkg.name']}" do
+remote_file "/root/#{node['es']['pkg.name']}" do
   source "https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/rpm/elasticsearch/#{node['es']['version']}/#{node['es']['pkg.name']}"
   owner 'root'
   group 'root'
   mode '0755'
   action :create
   checksum "#{node['es']['pkg.sha256']}"
-  not_if "[ -f /var/chef/cache/#{node['es']['pkg.name']} ]"
+  not_if "[ -f /root/#{node['es']['pkg.name']} ]"
 end
 
 # install RPM:
-rpm_package "/var/chef/cache/#{node['es']['pkg.name']}" do
+rpm_package "/root/#{node['es']['pkg.name']}" do
   action :install
   not_if "rpm -qa |grep -q #{node['es']['pkg.name'].chomp('.rpm')}"
 end
@@ -66,4 +66,3 @@ service 'elasticsearch' do
   supports :status => true, :restart => true, :reload => true
   subscribes :restart, ['template[/etc/sysconfig/elasticsearch]','template[/etc/elasticsearch/elasticsearch.yml]']
 end 
-
