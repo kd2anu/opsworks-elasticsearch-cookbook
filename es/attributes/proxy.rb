@@ -1,11 +1,6 @@
 include_attribute "es::default"
 include_attribute "es::nginx"
 
-# Try to load data bag item 'elasticsearch/aws' ------------------
-#
-users = Chef::DataBagItem.load('es', 'users')[node.chef_environment]['users'] rescue []
-# ----------------------------------------------------------------
-
 # === NGINX ===
 # Allowed users are set based on data bag values, when it exists.
 #
@@ -13,7 +8,8 @@ users = Chef::DataBagItem.load('es', 'users')[node.chef_environment]['users'] re
 #
 default[:nginx][:server_name]    = "elasticsearch"
 default[:nginx][:port]           = "8080"
-default[:nginx][:users]          = users
+default[:nginx][:username] = "#{node['elasticsearch']['nginx']['users']['username']}"
+default[:nginx][:password] = "#{node['elasticsearch']['nginx']['users']['password']}"
 default[:nginx][:passwords_file] = "#{default['es']['path.conf']}/passwords"
 
 # Deny or allow authenticated access to cluster API.

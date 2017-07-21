@@ -8,20 +8,18 @@ template "#{node[:nginx][:dir]}/conf.d/elasticsearch_proxy.conf" do
   notifies :reload, 'service[nginx]'
 end
 
-ruby_block "add #{node[:nginx][:users]} to passwords file" do
+ruby_block "add #{node[:nginx][:username]} to passwords file" do
   block do
     require 'webrick/httpauth/htpasswd'
     @htpasswd = WEBrick::HTTPAuth::Htpasswd.new(node[:nginx][:passwords_file])
 
-    node[:nginx][:users].each do |u|
-      Chef::Log.debug "Adding user '#{u['username']}' to #{node.elasticsearch[:nginx][:passwords_file]}\n"
-      @htpasswd.set_passwd( 'Elasticsearch', u['username'], u['password'] )
-    end
+    Chef::Log.debug "Adding user #{node[:nginx][:username]} to #{node[:nginx][:passwords_file]}\n"
+    @htpasswd.set_passwd('Elasticsearch', "#{node[:nginx][:username]}", "#{node[:nginx][:password]}")
 
     @htpasswd.flush
   end
 
-  not_if { node[:nginx][:users].empty? }
+  not_if { node[:nginx][:username].empty? }
 end
 
 # Ensure proper permissions and existence of the passwords file
