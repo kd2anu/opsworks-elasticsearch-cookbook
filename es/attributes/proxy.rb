@@ -7,7 +7,7 @@ include_attribute "es::nginx"
 # It's possible to define the credentials directly in your node configuration, if your wish.
 #
 default[:nginx][:server_name]    = "elasticsearch"
-default[:nginx][:port]           = "80"
+default[:nginx][:port]           = "8080"
 default[:nginx][:username] = "#{node['elasticsearch']['nginx']['users']['username']}"
 default[:nginx][:password] = "#{node['elasticsearch']['nginx']['users']['password']}"
 default[:nginx][:passwords_file] = "#{default['es']['path.conf']}/passwords"
