@@ -22,7 +22,7 @@ end
 
 # download RPM from URL:
 remote_file "/root/#{node['es']['pkg.name']}" do
-  source "https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/rpm/elasticsearch/#{node['es']['version']}/#{node['es']['pkg.name']}"
+  source "#{node['es']['source']}"
   owner 'root'
   group 'root'
   mode '0755'
