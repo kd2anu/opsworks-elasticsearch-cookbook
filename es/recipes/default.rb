@@ -39,7 +39,7 @@ end
 
 # cloud-aws plugin:
 execute 'install cloud-aws plugin' do
-  command '/usr/share/elasticsearch/bin/plugin install cloud-aws'
+  command "/usr/share/elasticsearch/bin/plugin install elasticsearch/elasticsearch-cloud-aws/#{node['es']['cloud-aws.version']}"
   not_if '[ -d /usr/share/elasticsearch/plugins/cloud-aws ]'
 end
 
